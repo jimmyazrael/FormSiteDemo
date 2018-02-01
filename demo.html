@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Form Site Demo</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="js/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="formView" class="container">
+        <div class="input-group mt-2 mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">First and last name</span>
+            </div>
+            <input type="text" class="form-control" v-model="firstName">
+            <input type="text" class="form-control" v-model="lastName">
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="">Birthday</span>
+            </div>
+            <Datepicker language="en" v-model="birthday" :disabled="dpState.disabled"></Datepicker>
+            <span v-show="age!=-1">Age:{{ age }}</span>
+        </div>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" v-model="gender">
+                <option disabled value="">Choose...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div class="input-group mb-2">
+        	<div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Annual Income</label>
+            </div>
+            <input type="number" name="income" min=0 step=100 v-model="income">
+        </div>
+        <div class="alert alert-info mb-2" v-show="gender=='male'">
+            Ah, you're a man. Being a {{ gender }}, how do you feel?
+        </div>
+        <div class="alert alert-info mb-2" v-show="gender=='female'">
+            Hey, girl. Being a {{ gender }}, how do you feel?
+        </div>
+        <div class="alert alert-danger mb-2" v-show="showErr">
+            <div v-for="err in errMsg">{{ err }}</div>
+        </div>
+        <div class="mt-3">
+            <button @click="submitForm()" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <script src="js/main.bundle.v1.0.js"></script>
+</body>
